@@ -1,15 +1,17 @@
 import { Login } from '@/components/login';
 import { Counter } from '@/components/counter';
+import { RouteObject } from 'react-router-dom';
 
-export default [
+const routes: RouteObject[] = [
   {
-    name: 'login',
-    path: '/login',
-    component: Login,
+    path: '/',
+    element: Login,
+    index: true,
   },
   {
-    name: 'counter',
     path: '/counter',
-    component: Counter,
+    element: Counter,
   },
 ];
+
+export default routes;

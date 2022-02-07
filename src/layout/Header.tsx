@@ -11,9 +11,9 @@ export default () => {
     <header>
       <h1>logo</h1>
       <nav>
-        {routes.map((route) => (
-          <Link to={route.path} key={route.name}>
-            {route.name}
+        {routes.map((route, index) => (
+          <Link to={route.path} key={index}>
+            {route.path}
           </Link>
         ))}
       </nav>

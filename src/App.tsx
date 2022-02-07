@@ -1,13 +1,21 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+
+import { Login } from '@/components/login';
+import { Counter } from '@/components/counter';
 
 import { Header } from './layout';
 
-import routes from '@/routes';
-
-export default () => (
-  <Router>
-    <Header />
-    <main>Hello World</main>
-  </Router>
-);
+export default () => {
+  return (
+    <>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/counter" element={<Counter />} />
+        </Routes>
+      </main>
+    </>
+  );
+};

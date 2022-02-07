@@ -1,4 +1,4 @@
-const { resolve } = require('path');
+const { resolve, join } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -63,8 +63,11 @@ module.exports = (env, argv) => {
     config = {
       ...config,
       devServer: {
-        port: 3000,
-        overlay: true,
+        static: {
+          directory: join(__dirname, 'public'),
+        },
+        compress: true,
+        port: 9000,
         historyApiFallback: true,
       },
       devtool: 'eval-cheap-module-source-map',
