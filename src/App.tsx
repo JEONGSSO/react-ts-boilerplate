@@ -8,10 +8,6 @@ import routes from '@/routes';
 export default () => (
   <Router>
     <Header />
-    <main>
-      {routes.map((route) => (
-        <Route key={route.name} {...route} />
-      ))}
-    </main>
+    <main>Hello World</main>
   </Router>
 );
