@@ -1,12 +1,12 @@
 import React from 'react';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import { render, userEvent, screen } from '@/test-utils/renderWithProviders';
 
 import { Login } from '../index';
 
 describe('login test', () => {
-  it('로그인 성공 테스트', async () => {
-    const email: String = 'test@naver.com';
-    const password: String = 'test1234';
+  test('로그인 성공 테스트', async () => {
+    const email = 'test@naver.com';
+    const password = 'test1234';
 
     render(<Login />);
 
@@ -14,15 +14,13 @@ describe('login test', () => {
     const passwordElem =
       screen.getByPlaceholderText('비밀번호를 입력해주세요.');
 
-    fireEvent.keyUp(emailElem, { target: { value: email } });
-    fireEvent.keyUp(passwordElem, { target: { value: password } });
+    userEvent.type(emailElem, email);
+    userEvent.type(passwordElem, password);
 
     const buttonElem = screen.getByRole('button');
-    fireEvent.click(buttonElem);
+    userEvent.click(buttonElem);
 
-    await waitFor(() => {
-      const loginSuccessElem = screen.getByText('로그인 성공!');
-      expect(loginSuccessElem).toBeInTheDocument();
-    });
+    const loginSuccessElem = await screen.findByText('로그인 성공!');
+    expect(loginSuccessElem).toBeInTheDocument();
   });
 });

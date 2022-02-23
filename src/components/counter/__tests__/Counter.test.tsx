@@ -12,7 +12,7 @@ describe('카운터 앱', () => {
     render(<Counter />);
   });
 
-  it('increment Click Event Call', () => {
+  test('increment Click Event Call', () => {
     const increButton = screen.getByText('+');
 
     fireEvent.click(increButton);
@@ -21,7 +21,7 @@ describe('카운터 앱', () => {
     expect(Number(label.textContent)).toBe(1);
   });
 
-  it('increment Click Event Call', () => {
+  test('decrement Click Event Call', () => {
     const increButton = screen.getByText('-');
 
     fireEvent.click(increButton);

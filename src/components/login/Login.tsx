@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 
 import './input.scss';
 
@@ -9,18 +9,22 @@ export default () => {
   const [password, setPassword] = useState('');
   const [login, setLogin] = useState(false);
 
-  const emailSetter = ({ target }) => {
+  const emailSetter = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setEmail(target.value);
   };
 
-  const passwordSetter = ({ target }) => {
+  const passwordSetter = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setPassword(target.value);
   };
 
-  const submitHandle = async (e) => {
+  const submitHandle = async (e: FormEvent) => {
     e.preventDefault();
 
-    const successLogin = (users: Array<Users> = [], email, password) =>
+    const successLogin = (
+      users: Users[] = [],
+      email: string,
+      password: string
+    ) =>
       users.some((user) => user.email === email && user.password === password);
 
     const fakeFetchUsers = new Promise((resolve, reject) => {
@@ -31,7 +35,7 @@ export default () => {
       );
     });
 
-    const data: any = await fakeFetchUsers.then((res) => res).catch(alert);
+    const data: any = await fakeFetchUsers.then((res) => res).catch(alert); // 여기 얼럿을 바로 넘기면 reject 텍스트가 바로들어감
 
     if (successLogin(data, email, password)) {
       setLogin(true);
@@ -43,14 +47,14 @@ export default () => {
       <input
         type="text"
         name="eamil"
-        onKeyUp={emailSetter}
+        onChange={emailSetter}
         defaultValue={email}
         placeholder="이메일을 입력해주세요."
       />
       <input
         type="password"
         name="password"
-        onKeyUp={passwordSetter}
+        onChange={passwordSetter}
         defaultValue={password}
         placeholder="비밀번호를 입력해주세요."
       />

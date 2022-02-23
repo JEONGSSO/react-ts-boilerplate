@@ -1,20 +1,17 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen, userEvent } from '@/test-utils/renderWithProviders';
 
 import App from '@/App';
 
 describe('Routes Test', () => {
-  it('input link click', () => {
+  test('input link click', () => {
     render(<App />);
-    const LoginLinkElem = screen.getByText('login');
 
-    fireEvent.click(LoginLinkElem);
+    const counterLink = screen.getByText('counter');
 
-    const { pathname } = location;
-    expect(pathname).toBe('/login');
+    expect(location.pathname).toBe('/');
+    userEvent.click(counterLink);
 
-    const emailInputElem =
-      screen.getByPlaceholderText('이메일을 입력해주세요.');
-    expect(emailInputElem).toBeInTheDocument();
+    expect(location.pathname).toBe('/counter');
   });
 });
